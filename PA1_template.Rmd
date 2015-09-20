@@ -1,4 +1,7 @@
-# Assignment 1
+---
+output: html_document
+---
+# Assignment 1 (updated)
 ## Loading and preprocessing the data
 Show any code that is needed to
 
