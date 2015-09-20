@@ -87,7 +87,7 @@ img {
 ##  3rd Qu.: 12.00   2012-10-05:  288   3rd Qu.:1766.2  
 ##  Max.   :806.00   2012-10-06:  288   Max.   :2355.0  
 ##  NA's   :2304     (Other)   :15840</code></pre>
-<p>All the variable classes are of suitable formats. However, there are NAs in ‘steps’ variables. We will need to handle them soon.</p>
+<p>With the above commands, we can seee that the variable classes are of suitable formats. However, there are NAs in ‘steps’ variables. We will need to handle them soon.</p>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>
@@ -98,9 +98,10 @@ img {
 <pre class="r"><code>activityCSV_No_NA &lt;- activityCSV[!is.na(activityCSV$steps),] #remove NAs
 steps_per_day &lt;- aggregate(steps~date,activityCSV_No_NA,sum)</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day</li>
+<li>Make a histogram of the total number of steps taken each day</li>
 </ol>
-<pre class="r"><code>hist(steps_per_day$steps,
+<pre class="r"><code>#Plot it!
+hist(steps_per_day$steps,
      breaks = 20,
      xlab = &quot;Steps&quot;,
      main = &quot;Histogram: Steps Taken per Day (Omitting NAs)&quot;,
@@ -110,9 +111,9 @@ steps_per_day &lt;- aggregate(steps~date,activityCSV_No_NA,sum)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Calculate and report the mean and median of the total number of steps taken per day</li>
 </ol>
-<pre class="r"><code>mean(steps_per_day$steps)</code></pre>
+<pre class="r"><code>mean(steps_per_day$steps) #Calculating the mean</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
-<pre class="r"><code>median(steps_per_day$steps)</code></pre>
+<pre class="r"><code>median(steps_per_day$steps) #Calculating the median</code></pre>
 <pre><code>## [1] 10765</code></pre>
 <p><strong>The mean no of steps a day is 10766.19</strong> <strong>The median no of steps a day is 10765</strong></p>
 </div>
@@ -121,8 +122,13 @@ steps_per_day &lt;- aggregate(steps~date,activityCSV_No_NA,sum)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Make a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</li>
 </ol>
-<pre class="r"><code>average_steps_per_day &lt;- aggregate(steps~interval,activityCSV_No_NA,mean)
+<pre class="r"><code>#Calculate average steps per day
+average_steps_per_day &lt;- aggregate(steps~interval,activityCSV_No_NA,mean)
+
+# use suitable names for column header
 colnames(average_steps_per_day) &lt;- c(&quot;Interval&quot;,&quot;Steps&quot;)
+
+#Plot it!
 plot(average_steps_per_day$Interval, average_steps_per_day$Steps,
      type = &quot;l&quot;,
      col = &quot;red&quot;,
@@ -134,7 +140,7 @@ plot(average_steps_per_day$Interval, average_steps_per_day$Steps,
 <ol start="2" style="list-style-type: decimal">
 <li>Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?</li>
 </ol>
-<pre class="r"><code>average_steps_per_day[which.max(average_steps_per_day$Steps),]</code></pre>
+<pre class="r"><code>average_steps_per_day[which.max(average_steps_per_day$Steps),] #Calculate the max</code></pre>
 <pre><code>##     Interval    Steps
 ## 104      835 206.1698</code></pre>
 <p><strong>The maximum number of steps (206.1698) occur at interval 835</strong></p>
@@ -145,7 +151,7 @@ plot(average_steps_per_day$Interval, average_steps_per_day$Steps,
 <ol style="list-style-type: decimal">
 <li>Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)</li>
 </ol>
-<pre class="r"><code>activityCSV_NA &lt;- sum(is.na(activityCSV$steps))
+<pre class="r"><code>activityCSV_NA &lt;- sum(is.na(activityCSV$steps)) #activityCSV_NA is with NAs
 print(activityCSV_NA)</code></pre>
 <pre><code>## [1] 2304</code></pre>
 <p><strong>The total no of rows with NAs is 2304</strong></p>
@@ -156,7 +162,7 @@ print(activityCSV_NA)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Create a new dataset that is equal to the original dataset but with the missing data filled in.</li>
 </ol>
-<pre class="r"><code>activityCSV2 &lt;- activityCSV
+<pre class="r"><code>activityCSV2 &lt;- activityCSV # clone activityCSV into activityCSV2
 for (i in 1:ncol(activityCSV2)){
         activityCSV2[is.na(activityCSV2[,i]),i] &lt;- 
                 mean(average_steps_per_day$Steps,na.rm=TRUE) #replace NA with mean
