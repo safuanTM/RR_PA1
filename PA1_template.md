@@ -1,3 +1,4 @@
+# Reproducible Research: Peer Assessment 1
 # Assignment 1 (updated)
 ## Loading and preprocessing the data
 Show any code that is needed to
@@ -61,7 +62,7 @@ hist(steps_per_day$steps,
 )
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
 
 -3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -105,7 +106,7 @@ plot(average_steps_per_day$Interval, average_steps_per_day$Steps,
      )
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
 -2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -165,7 +166,7 @@ hist(steps_per_day2$steps,
 )
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
 
 ```r
 mean(steps_per_day2$steps)
@@ -258,4 +259,4 @@ plot(average_steps_per_weekend$Interval, average_steps_per_weekend$Steps,
      )
 ```
 
-![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
